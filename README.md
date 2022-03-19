@@ -1,3 +1,6 @@
+***NOTE : THIS IS NOT A CHALLENGE STARTER TEMPLATE. THIS IS A COMPLETED CODE***
+
+
 # 🏗 scaffold-eth | 🏰 BuidlGuidl
 
 ## 🚩 **Challenge 3: Minimum Viable Exchange**
