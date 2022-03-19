@@ -29,11 +29,13 @@ export default function Events({ contracts, contractName, eventName, localProvid
         {eventName} Events
         <br />
         {eventName === "EthToTokenSwap"
-          ? " ⟠ -->🎈 Address | Trade | AmountIn | AmountOut"
+          ? " ⟠ -->🎈 Address | AmountIn | AmountOut"
           : eventName === "TokenToEthSwap"
-          ? "🎈-->⟠ Address | Trade | AmountOut | AmountIn"
+          ? "🎈-->⟠ Address | AmountOut | AmountIn"
           : eventName === "LiquidityProvided"
           ? "➕ Address | Liquidity Minted | Eth In | Balloons In"
+          :eventName === "Approval"
+          ? "🎈-->Dex Approve | ➕ Owner | Spender | Amount"
           : "➖ Address | Liquidity Withdrawn | ETH out | Balloons Out "}
       </h2>
       <List
@@ -43,11 +45,12 @@ export default function Events({ contracts, contractName, eventName, localProvid
           return (
             <List.Item key={item.blockNumber + "_" + item.args[0].toString()}>
               <Address address={item.args[0]} ensProvider={mainnetProvider} fontSize={16} />
-              {item.args[1].toString().indexOf("E") == -1 ? (
+              {item.args[1].toString().indexOf("E") == -1 && (eventName=="LiquidityProvided"||eventName=="LiquidityRemoved") ? (
                 <TokenBalance balance={item.args[1]} provider={localProvider} />
-              ) : (
-                `${item.args[1].toString()}`
-              )}
+              ) : eventName=="Approval" ? (
+                //`${item.args[1].toString()}`
+                <Address address={item.args[1]} ensProvider={mainnetProvider} fontSize={16} />
+              ):(null)}
               <TokenBalance balance={item.args[2]} provider={localProvider} />
               <TokenBalance balance={item.args[3]} provider={localProvider} />
             </List.Item>

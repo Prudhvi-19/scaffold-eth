@@ -59,7 +59,7 @@ const { ethers } = require("ethers");
 */
 
 /// 📡 What chain are your contracts deployed to?
-const initialNetwork = NETWORKS.localhost; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
+const initialNetwork = NETWORKS.ropsten; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
 
 // 😬 Sorry for all the console logging
 const DEBUG = true;
@@ -375,6 +375,14 @@ function App(props) {
             mainnetProvider={mainnetProvider}
             startBlock={1}
           />
+          <Events
+            contracts={readContracts}
+            contractName="Balloons"
+            eventName="Approval"
+            localProvider={localProvider}
+            mainnetProvider={mainnetProvider}
+            startBlock={1}
+          />  
         </Route>
         }
         <Route exact path="/debug">
